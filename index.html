@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=++-, initial-scale=1.0">
+    <title>Random Race</title>
+    <link rel="shortcut icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV-3uCWonIEkdjvSD3L1ROWgIu_-AtuDCtjwJJGTs42z5Yg3swe8IxxMfoszl8cL2yQTM&usqp=CAU" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@500&family=Padauk&display=swap" rel="stylesheet">
+    <style>
+        .game {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .cube {
+            height: 125px;
+            width: 125px;
+            background-color: blueviolet;
+            margin-bottom: 20px;
+            box-shadow: rgba(255, 255, 255, 0.35) 0px 5px 15px;
+            border-radius: 10px;
+            transition: all 1s ease-in-out;
+            border: 1px solid black;
+        }
+
+        .function button {
+            height: 40px;
+            width: 120px;
+            font-size: 17px;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+
+        #random {
+            height: 80%;
+            color: white;
+            font-size: 22px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            margin-top: 10px;
+        }
+        
+
+        .pointable {
+            display: flex;
+            justify-content: center;
+        }
+
+        table {
+            border: 2px solid black;
+            width: 210px;
+            text-align: center;
+            margin-right: 5px;
+        }
+
+
+        table td {
+            border: 2px solid black;
+            height: 25px;
+        }
+
+        #replay {
+            display: none;
+        }
+
+        .end {
+            display: flex;
+            justify-content: space-evenly;
+        }
+        .letsplay
+        {
+            border: 2px solid black;
+            width: 40vw;
+            height: 77vh;
+            padding: 25px;
+            margin: auto;
+            margin-top: 50px;
+            box-shadow: 0 0 20px blueviolet;
+            background: url(https://img.freepik.com/free-photo/blue-smooth-wall-textured-background_53876-106133.jpg?w=996&t=st=1661277074~exp=1661277674~hmac=7d0fd2d7fa623c4366361d6ac2937cc9f810bb74830f357ef578bdde2ebe7cd4);
+            background-size: cover;
+        }
+        #play1
+        {
+            background-color: rgb(255, 74, 74);
+        }
+        #play1 td,#play2 td
+        {
+            background-color: white;
+        }
+        #tp1
+        {
+            background-color: rgb(255, 74, 74) !important;
+        }
+        #play2,#tp2
+        {
+            background-color: lightskyblue !important;
+        }
+        #info
+        {
+           font-size: 20px;
+           margin-bottom: 10px;
+           color: white;
+        }
+        #result
+        {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+        }
+
+        #replay button
+        {
+            height: 40px;
+            width: 100px;
+            background-color: rgb(254, 44, 86);
+            color: white;
+            cursor: pointer;
+        }
+        body{
+            background: url(mint-green-fabric-background.jpg);
+            background-size: cover;
+        }
+        .intro
+        {
+            width: fit-content;
+            position: absolute;
+            top: 20px;
+        }
+        .gametitle h2
+        {
+            text-align: center;
+            font-size: 40px;
+            margin-bottom: 60px;
+            font-family: 'DynaPuff', cursive;
+            color: rgb(232, 34, 31);
+        }
+        .form
+        {
+            width: fit-content;
+            border: 1px solid red;
+            padding: 30px;
+            margin-left: 18px;
+            background-color: rgb(166, 232, 254);
+        }
+        .form label
+        {
+            font-size: 22px;
+            font-weight: bold;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .form input
+        {
+            margin-top: 12px;
+            width: 200px;
+            height: 25px;
+            border: 2px solid red;
+            margin-bottom: 18px;
+            padding-left: 10px;
+            font-size: 15px;
+        }
+        .form input:focus
+        {
+            border: 1px solid red;
+            outline: 1px solid red;
+        }
+         #play
+         {
+            display: block;
+            margin: auto;
+            width: 120px;
+            font-size: 20px;
+            background-color:rgb(236, 40, 79);
+            color: white;
+            margin-top: 7px;
+            cursor: pointer;
+            box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+           
+         }
+         #roll
+         {
+            box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+         }
+         .insthead h2
+         {
+            font-family: 'DynaPuff', cursive;
+            font-size: 28px;
+            text-align: center;
+         }
+         .instruction
+         {
+            width: fit-content;
+            margin-right: 5px;
+            position: fixed;
+            right: 19px;
+            top: 55px;
+            border: 1px solid black;
+            width: 350px;
+            background-color: lightpink;
+         }
+         .instruction ul li
+         {
+            font-size: 15px;
+         }
+         @media(max-width:1350px)
+         {
+                .gaming
+                {
+                    display: flex;
+                    flex-direction: column;
+                    flex-wrap: wrap;
+                }
+                .intro
+                {
+                   position: static;
+                   display: block;
+                   margin: auto;
+                   
+                }
+                .form
+                {
+                    margin-left: -5px;
+                }
+                .letsplay
+                {
+                    width: 75vw;
+                    margin-bottom: 25px;
+                }
+                .instruction
+                {
+                    position: static;
+                    margin: auto;
+                    width: 80vw;
+                    padding-right: 5px;
+                    margin-top: 30px;
+                    margin-bottom: -10px;
+                }
+                .instruction ul
+                {
+                    width: fit-content;
+                    margin: auto;
+                }
+
+                #roll
+                {
+                    margin-top: 15px;
+                    margin-bottom: 25px;
+                }
+               
+         }
+    </style>
+</head>
+
+<body>
+    <div class="gaming">
+    <div class="intro">
+    <div class="gametitle">
+        <h2>Random Race</h2>
+    </div>
+    <div class="form">
+        <label for="player1">Player1</label><br>
+        <input type="text" id="player1" name="player1" placeholder="Enter your name" autocomplete="off"><br>
+        <label for="player2">Player2</label><br>
+        <input type="text" id="player2" name="player2"  placeholder="Enter your name" autocomplete="off"><br>
+        <button id="play" onclick="start()">Play</button>
+    </div>
+</div>
+
+<div class="instruction">
+    <div class="insthead">
+        <h2>INSTRUCTION</h2>
+    </div>
+    <div class="points">
+        <ul>
+            <li>This game require two players.</li><br>
+            <li>Both player should enter their name.</li><br>
+            <li>Then click on play button.</li><br>
+            <li>Player1 will start the game by clicking 'ROLL' button.</li><br>
+            <li>There will be total 5 rounds.</li><br>
+            <li>The one with highest total after 5 rounds will win this game.</li><br>
+        </ul>
+
+    </div>
+</div>
+
+
+    <div class="letsplay">
+        <div class="game">
+            <div class="cube">
+                <p id="random">Start!!</p>
+            </div>
+            <div id="info"></div>
+            <div class="function">
+                <button onclick="roll()" id="roll" disabled>ROLL</button>
+            </div>
+            
+        </div>
+        <div class="pointable">
+            <table id="play1">
+                <th id="p1head">Player 1</th>
+                <tr>
+                    <td class="p1round1"></td>
+                </tr>
+                <tr>
+                    <td class="p1round2"></td>
+                </tr>
+                <tr>
+                    <td class="p1round3"></td>
+                </tr>
+                <tr>
+                    <td class="p1round4"></td>
+                </tr>
+                <tr>
+                    <td class="p1round5"></td>
+                </tr>
+                <tr>
+                    <th id="tp1">0</th>
+                </tr>
+            </table>
+
+            <table id="play2">
+                <th id="p2head">Player 2</th>
+                <tr>
+                    <td class="p2round1"></td>
+                </tr>
+                <tr>
+                    <td class="p2round2"></td>
+                </tr>
+                <tr>
+                    <td class="p2round3"></td>
+                </tr>
+                <tr>
+                    <td class="p2round4"></td>
+                </tr>
+                <tr>
+                    <td class="p2round5"></td>
+                </tr>
+                <tr>
+                    <th id="tp2">0</th>
+                </tr>
+            </table>
+
+           
+
+        </div>
+        <br>
+        <div class="end">
+            <div id="result">
+            </div>
+            <div id="replay">
+                <button onclick="reloadwin()">REPLAY</button>
+            </div>
+        </div>
+    </div>
+   
+</div>
+    <script>
+        let dice = document.getElementsByClassName('cube')[0];
+        let count = 0;
+        let deg = 0;
+        let roundcount = 0;
+        let print = document.getElementById('random');
+        let roundp1 = 0;
+        let roundp2 = 0;
+        let tp1 = 0;
+        let tp2 = 0;
+        let p1data;
+        let p2data;
+        function roll() {
+            roundcount++;
+            if (roundcount <= 10) {
+                print.innerText = null;
+                count++;
+                deg = 360 * count;
+                dice.style.transform = `rotate(${deg}deg)`;
+                setTimeout(() => {
+                    print.innerText = Math.floor(Math.random() * 6 + 1);
+                    if (roundcount % 2 == 0) {
+                        roundp2++;
+                        document.getElementsByClassName(`p2round${roundp2}`)[0].innerText = print.innerText;
+
+                        tp2 = tp2 + Number(print.innerText);
+                        document.getElementById('tp2').innerText = tp2;
+                        if (roundcount == 10) {
+                            if (tp1 == tp2) {
+                                document.getElementById('result').innerText = "Game-Draw"
+                            }
+                            else if (tp1 > tp2) {
+                                document.getElementById('result').innerText = `${p1data} wins`;
+                            }
+                            else {
+                                document.getElementById('result').innerText = `${p2data} wins`;
+                            }
+
+                            document.getElementById('replay').style.display = "inline-block";
+                        }
+                    }
+                    else {
+                        roundp1++;
+                        document.getElementsByClassName(`p1round${roundp1}`)[0].innerText = print.innerText;
+                        tp1 = tp1 + Number(print.innerText);
+                        document.getElementById('tp1').innerText = tp1;
+                    }
+
+                    if (roundcount % 2 != 0) {
+                        document.getElementById('info').innerText = `${p2data}'s Turn`;
+                    }
+                    else {
+                        if (roundp2 <= 4) {
+                            document.getElementById('info').innerText = `${p1data}'s Turn`;
+                        }
+                        else {
+                            document.getElementById('info').innerText = null;
+                        }
+                    }
+
+
+                }, 1000);
+
+            }
+
+
+        }
+        function reloadwin() {
+               location.reload();
+        }
+
+        function start()
+        {
+             p1data = document.getElementById('player1').value;
+             p2data = document.getElementById('player2').value;
+             if(p1data!=null & p2data!=null)
+             {
+                document.getElementById('roll').disabled = false;
+             }
+             document.getElementById('info').innerText = `${p1data}'s Turn`;
+             document.getElementById('p1head').innerText = `${p1data}`
+             document.getElementById('p2head').innerText = `${p2data}`
+            
+            
+        }
+
+
+    </script>
+</body>
+
+</html>
